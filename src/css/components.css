@@ -137,7 +137,7 @@
 
 .hero-title {
   color: var(--color-charcoal);
-  font-size: clamp(2rem, 3.6vw, 3.75rem);
+  font-size: clamp(2rem, 3.2vw, 3.3rem);
   line-height: 1.15;
   white-space: nowrap;
   margin-bottom: var(--space-md);
