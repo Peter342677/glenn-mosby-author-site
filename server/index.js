@@ -18,6 +18,13 @@ const distDir = join(__dirname, '..', 'dist');
 
 const app = express();
 
+// Hostinger's edge/CDN sits in front of the app as a single reverse proxy
+// hop, so express-rate-limit needs `trust proxy` set to read the real
+// client IP from X-Forwarded-For instead of throwing a ValidationError.
+if (isProd) {
+  app.set('trust proxy', 1);
+}
+
 app.use(
   helmet({
     contentSecurityPolicy: {
