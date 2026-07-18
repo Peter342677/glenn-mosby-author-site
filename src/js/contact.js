@@ -103,7 +103,7 @@ export function initContactForm() {
       statusEl.classList.add('success');
       fireConfetti();
     } catch (err) {
-      statusEl.textContent = `${err.message || 'Something went wrong. Please try again.'} You can also email us directly at info@authorglennmosby.com.`;
+      statusEl.textContent = `${err.message || 'Something went wrong. Please try again.'} You can also email us directly at blackmantisprints@gmail.com.`;
       statusEl.classList.add('error');
     } finally {
       submitBtn.disabled = false;

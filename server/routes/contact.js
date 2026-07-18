@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
-import nodemailer from 'nodemailer';
+import { getTransporter, getNotifyEmail, getFromEmail } from '../mailer.js';
 
 const router = Router();
 
@@ -35,24 +35,6 @@ function validate(body) {
   return { errors, data: { name, email, subject, message } };
 }
 
-let cachedTransporter = null;
-
-function getTransporter() {
-  if (!process.env.SMTP_HOST) return null;
-  if (cachedTransporter) return cachedTransporter;
-
-  cachedTransporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT) || 587,
-    secure: process.env.SMTP_SECURE === 'true',
-    auth: process.env.SMTP_USER
-      ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
-      : undefined,
-  });
-
-  return cachedTransporter;
-}
-
 router.post('/', contactLimiter, async (req, res) => {
   // Honeypot: bots fill hidden fields, real users leave it blank.
   if (req.body.company) {
@@ -65,7 +47,7 @@ router.post('/', contactLimiter, async (req, res) => {
   }
 
   const transporter = getTransporter();
-  const to = process.env.CONTACT_TO || 'info@authorglennmosby.com';
+  const to = getNotifyEmail();
 
   if (!transporter) {
     console.log('[contact] SMTP not configured — logging submission instead:', data);
@@ -74,7 +56,7 @@ router.post('/', contactLimiter, async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: process.env.CONTACT_FROM_EMAIL || `"Old Farmer John Had a Farm" <no-reply@authorglennmosby.com>`,
+      from: getFromEmail(),
       to,
       replyTo: data.email,
       subject: data.subject ? `[Website] ${data.subject}` : `New message from ${data.name}`,

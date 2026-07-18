@@ -3,6 +3,7 @@ import Stripe from 'stripe';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { mkdir, readFile, writeFile } from 'fs/promises';
+import { getTransporter, getNotifyEmail, getFromEmail } from '../mailer.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ordersFile = join(__dirname, '..', 'data', 'orders.json');
@@ -19,6 +20,34 @@ async function appendOrder(order) {
   }
   orders.push(order);
   await writeFile(ordersFile, JSON.stringify(orders, null, 2));
+}
+
+async function notifyOrder(order) {
+  const transporter = getTransporter();
+  if (!transporter) {
+    console.log('[webhook] SMTP not configured — order notification not sent.');
+    return;
+  }
+
+  const amount = ((order.amountTotal || 0) / 100).toFixed(2);
+  const meta = order.metadata || {};
+
+  await transporter.sendMail({
+    from: getFromEmail(),
+    to: getNotifyEmail(),
+    replyTo: order.customerEmail || undefined,
+    subject: `New order — $${amount} (${order.id})`,
+    text: [
+      `A new order was placed on the website.`,
+      ``,
+      `Order ID: ${order.id}`,
+      `Amount: $${amount} ${(order.currency || 'usd').toUpperCase()}`,
+      `Customer email: ${order.customerEmail || '—'}`,
+      `Customer name: ${meta.customerName || '—'}`,
+      `Shipping address: ${meta.address || '—'}, ${meta.city || '—'} ${meta.zip || ''}`.trim(),
+      `Items: ${meta.itemSummary || '—'}`,
+    ].join('\n'),
+  });
 }
 
 // Mounted with express.raw() in server/index.js — req.body here is a
@@ -58,6 +87,11 @@ router.post('/', async (req, res) => {
       await appendOrder(order);
     } catch (err) {
       console.error('[webhook] failed to persist order:', err);
+    }
+    try {
+      await notifyOrder(order);
+    } catch (err) {
+      console.error('[webhook] order notification email failed:', err);
     }
   }
 
