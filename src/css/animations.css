@@ -1,0 +1,43 @@
+/* Idle levitation loop for the hero book cover — paused while GSAP drives
+   parallax transforms on the same element via inline style, since inline
+   transform would otherwise fight this keyframe; hero.js toggles a class. */
+@keyframes book-levitate {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(2deg);
+  }
+}
+
+.hero-book-cover.is-floating {
+  animation: book-levitate 5.5s ease-in-out infinite;
+}
+
+@keyframes confetti-fall {
+  to {
+    transform: translate(var(--drift, 0), 100vh) rotate(var(--spin, 360deg));
+    opacity: 0;
+  }
+}
+
+.confetti-piece {
+  animation: confetti-fall var(--fall-duration, 2.4s) ease-in forwards;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
