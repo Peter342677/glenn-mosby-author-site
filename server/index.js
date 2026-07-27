@@ -5,8 +5,6 @@ import compression from 'compression';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import contactRouter from './routes/contact.js';
-import checkoutRouter from './routes/checkout.js';
-import webhookRouter from './routes/webhook.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const isProd = process.env.NODE_ENV === 'production';
@@ -42,15 +40,9 @@ app.use(
 );
 app.use(compression());
 
-// Stripe webhook signature verification needs the raw request body, so it
-// must be mounted with express.raw() ahead of the global express.json()
-// parser below — otherwise the body would already be parsed/consumed.
-app.use('/api/stripe/webhook', express.raw({ type: 'application/json' }), webhookRouter);
-
 app.use(express.json({ limit: '20kb' }));
 
 app.use('/api/contact', contactRouter);
-app.use('/api/checkout', checkoutRouter);
 
 if (isProd) {
   app.use(
@@ -69,13 +61,7 @@ if (isProd) {
     '/': 'index.html',
     '/book': 'book.html',
     '/author': 'author.html',
-    '/shop': 'shop.html',
     '/contact': 'contact.html',
-    '/cart': 'cart.html',
-    '/checkout': 'checkout.html',
-    '/checkout-success': 'checkout-success.html',
-    '/product-coloring-book': 'product-coloring-book.html',
-    '/product-canvas-kit': 'product-canvas-kit.html',
   };
 
   Object.entries(pages).forEach(([route, file]) => {
