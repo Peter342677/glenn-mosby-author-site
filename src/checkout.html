@@ -3,17 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact Us | Old Farmer John Had a Farm | Glenn Mosby</title>
-  <meta name="description" content="Get in touch with Glenn Mosby, author of Old Farmer John Had a Farm." />
-  <link rel="canonical" href="https://authorglennmosby.com/contact.html" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Contact Us | Glenn Mosby" />
-  <meta property="og:description" content="Get in touch with Glenn Mosby, author of Old Farmer John Had a Farm." />
-  <meta property="og:image" content="/assets/img/book-cover.png" />
-  <meta property="og:url" content="https://authorglennmosby.com/contact.html" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="/assets/img/book-cover.png" />
+  <title>Checkout | Old Farmer John Had a Farm | Glenn Mosby</title>
+  <meta name="description" content="Complete your order for Old Farmer John Had a Farm merchandise." />
+  <link rel="canonical" href="https://authorglennmosby.com/checkout.html" />
+  <meta name="robots" content="noindex" />
 
   <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="/assets/img/favicon-180.png" />
@@ -72,51 +65,47 @@
         <div class="page-hero-overlay"></div>
       </div>
       <div class="container">
-        <span class="eyebrow">Get in Touch</span>
-        <h1 data-reveal-lines>Contact Us</h1>
+        <span class="eyebrow">Almost there</span>
+        <h1 data-reveal-lines>Checkout</h1>
       </div>
     </div>
 
     <section>
       <div class="container contact-layout">
-        <form id="contact-form" class="contact-form" novalidate>
-          <div class="contact-honeypot" aria-hidden="true">
-            <label for="company">Company</label>
-            <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
-          </div>
-
+        <form id="checkout-form" class="contact-form" novalidate>
           <div class="form-field">
             <input type="text" id="name" name="name" placeholder=" " required />
-            <label for="name">Your Name</label>
-            <span class="field-error" data-error-for="name" hidden></span>
+            <label for="name">Full Name</label>
           </div>
-
           <div class="form-field">
             <input type="email" id="email" name="email" placeholder=" " required />
-            <label for="email">Your Email</label>
-            <span class="field-error" data-error-for="email" hidden></span>
+            <label for="email">Email</label>
           </div>
-
-          <div class="form-field">
-            <input type="text" id="subject" name="subject" placeholder=" " />
-            <label for="subject">Subject</label>
-            <span class="field-error" data-error-for="subject" hidden></span>
+          <div class="form-row">
+            <div class="form-field">
+              <input type="text" id="address" name="address" placeholder=" " required />
+              <label for="address">Shipping Address</label>
+            </div>
           </div>
-
-          <div class="form-field">
-            <textarea id="message" name="message" rows="6" placeholder=" " required></textarea>
-            <label for="message">Message</label>
-            <span class="field-error" data-error-for="message" hidden></span>
+          <div class="form-row">
+            <div class="form-field">
+              <input type="text" id="city" name="city" placeholder=" " required />
+              <label for="city">City</label>
+            </div>
+            <div class="form-field">
+              <input type="text" id="zip" name="zip" placeholder=" " required />
+              <label for="zip">ZIP Code</label>
+            </div>
           </div>
-
-          <button type="submit" class="btn btn-primary" data-cursor-label="Send">Send Message</button>
+          <button type="submit" class="btn btn-primary" data-cursor-label="Pay">Proceed to Payment</button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
 
         <div class="contact-side" data-reveal>
-          <h3>We&rsquo;d love to hear from you</h3>
-          <p>Questions about Old Farmer John Had a Farm, school visits, or interview requests — send a note and we&rsquo;ll get back to you soon.</p>
-          <p>Prefer email? Reach us directly at <a class="btn-ghost" href="mailto:blackmantisprints@gmail.com">blackmantisprints@gmail.com</a>.</p>
+          <h3>Order Summary</h3>
+          <div data-checkout-summary class="cart-list"></div>
+          <p>Total: <strong data-checkout-total>$0.00</strong></p>
+          <p>You&rsquo;ll be redirected to Stripe&rsquo;s secure checkout to complete payment.</p>
         </div>
       </div>
     </section>

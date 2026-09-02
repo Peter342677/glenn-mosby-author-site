@@ -13,6 +13,10 @@ import { initBookflip } from './bookflip.js';
 import { initContactForm } from './contact.js';
 import { initIntroLoader } from './loader.js';
 import { initPageTransitions } from './pageTransitions.js';
+import { initMerchGallery } from './merchGallery.js';
+import { initCartBadge } from './cart.js';
+import { initCartPage } from './cartPage.js';
+import { initCheckoutPage } from './checkoutPage.js';
 
 // Each init runs in isolation — one module's error must never block the
 // rest (e.g. a compass edge case shouldn't be able to prevent hero video
@@ -32,6 +36,10 @@ import { initPageTransitions } from './pageTransitions.js';
   initBookflip,
   initContactForm,
   initPageTransitions,
+  initMerchGallery,
+  initCartBadge,
+  initCartPage,
+  initCheckoutPage,
 ].forEach((init) => {
   try {
     init();

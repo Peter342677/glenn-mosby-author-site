@@ -1142,3 +1142,60 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ============ Raffle section ============ */
+.raffle-section {
+  background: var(--color-paper-soft);
+  padding: var(--space-xl) 0;
+}
+
+.raffle-card {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--color-paper);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: var(--space-lg);
+}
+
+.raffle-card h2 {
+  margin-bottom: var(--space-sm);
+}
+
+.raffle-prizes {
+  list-style: none;
+  margin: var(--space-md) 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.raffle-prizes li {
+  padding-left: 1.4rem;
+  position: relative;
+  color: var(--text-muted);
+}
+
+.raffle-prizes li::before {
+  content: '🎟';
+  position: absolute;
+  left: 0;
+}
+
+.raffle-image {
+  width: 100%;
+  max-width: 360px;
+  border-radius: var(--radius-md);
+  margin: var(--space-md) auto;
+  display: block;
+}
+
+.raffle-price {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-barn-red);
+  margin-bottom: var(--space-sm);
+}
