@@ -506,10 +506,34 @@ section {
   margin-top: var(--space-xl);
   padding-top: var(--space-md);
   border-top: 1px solid #e6e6e6;
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm) var(--space-md);
   font-family: var(--font-fine);
   font-size: 0.9rem;
   color: var(--text-muted);
+}
+
+.footer-credit {
+  color: var(--color-barn-red);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast);
+}
+
+.footer-credit:hover,
+.footer-credit:focus-visible {
+  color: var(--color-charcoal);
+}
+
+@media (max-width: 600px) {
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 @media (min-width: 901px) {
