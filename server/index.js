@@ -115,6 +115,7 @@ if (isProd) {
     '/cart': 'cart.html',
     '/checkout': 'checkout.html',
     '/checkout-success': 'checkout-success.html',
+    '/dmca': 'dmca.html',
   };
 
   Object.entries(pages).forEach(([route, file]) => {

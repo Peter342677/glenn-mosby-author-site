@@ -1199,3 +1199,39 @@
   color: var(--color-barn-red);
   margin-bottom: var(--space-sm);
 }
+
+.legal-content {
+  max-width: 760px;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
+}
+
+.legal-content h2 {
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: var(--space-md) 0 var(--space-xs);
+}
+
+.legal-content h2:first-child {
+  margin-top: 0;
+}
+
+.legal-content p,
+.legal-content li {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.legal-content ol {
+  padding-left: 1.3em;
+}
+
+.legal-content li {
+  margin-bottom: var(--space-2xs);
+}
+
+.legal-content a {
+  color: var(--color-barn-red);
+  font-weight: 600;
+}

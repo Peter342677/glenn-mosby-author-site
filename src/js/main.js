@@ -2,7 +2,9 @@ import '../css/tokens.css';
 import '../css/base.css';
 import '../css/components.css';
 import '../css/animations.css';
+import '../css/accessibility.css';
 
+import { initAccessibilityToolbar } from './accessibility.js';
 import { initNav } from './nav.js';
 import { initSmoothScroll } from './smoothScroll.js';
 import { initReveal, initCountUp, initParallax } from './scroll.js';
@@ -22,6 +24,7 @@ import { initCheckoutPage } from './checkoutPage.js';
 // rest (e.g. a compass edge case shouldn't be able to prevent hero video
 // playback just because it happens to run earlier in this list).
 [
+  initAccessibilityToolbar,
   initIntroLoader,
   initNav,
   initSmoothScroll,

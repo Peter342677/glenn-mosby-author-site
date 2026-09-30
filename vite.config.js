@@ -29,6 +29,7 @@ export default defineConfig({
         cart: resolve(__dirname, 'src/cart.html'),
         checkout: resolve(__dirname, 'src/checkout.html'),
         checkoutSuccess: resolve(__dirname, 'src/checkout-success.html'),
+        dmca: resolve(__dirname, 'src/dmca.html'),
       },
       output: {
         manualChunks: {
