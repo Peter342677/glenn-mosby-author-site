@@ -18,6 +18,47 @@ const distDir = join(__dirname, '..', 'dist');
 
 const app = express();
 
+// TEMPORARY site-wide maintenance mode. Flip to false and redeploy to bring
+// the site back — kept as a hardcoded flag rather than an env var because
+// Hostinger auto-deploys have been observed to silently wipe env vars.
+const MAINTENANCE_MODE = true;
+const MAINTENANCE_PAGE = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Temporarily Unavailable</title>
+<style>
+  html, body { height: 100%; margin: 0; }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #faf6ef;
+    color: #2b2420;
+    text-align: center;
+    padding: 24px;
+  }
+  .card { max-width: 480px; }
+  h1 { font-size: 1.5rem; margin: 0 0 12px; }
+  p { font-size: 1.05rem; line-height: 1.5; color: #5a5148; margin: 0; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>This site is temporarily unavailable.</h1>
+    <p>Please contact your administrator.</p>
+  </div>
+</body>
+</html>`;
+
+if (MAINTENANCE_MODE) {
+  app.use((req, res) => {
+    res.status(503).set('Retry-After', '3600').type('html').send(MAINTENANCE_PAGE);
+  });
+}
+
 // Hostinger's edge/CDN sits in front of the app as a single reverse proxy
 // hop, so express-rate-limit needs `trust proxy` set to read the real
 // client IP from X-Forwarded-For instead of throwing a ValidationError.
