@@ -21,7 +21,7 @@ const app = express();
 // TEMPORARY site-wide maintenance mode. Flip to false and redeploy to bring
 // the site back — kept as a hardcoded flag rather than an env var because
 // Hostinger auto-deploys have been observed to silently wipe env vars.
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
 const MAINTENANCE_PAGE = `<!doctype html>
 <html lang="en">
 <head>
