@@ -134,3 +134,17 @@ export function initAccessibilityToolbar() {
     if (key) update({ [key]: e.target.checked });
   });
 }
+
+// Small badge linking to our own real DMCA/copyright notice page — not a
+// third-party verification seal, just a visible pointer to the actual policy.
+export function initDmcaBadge() {
+  const badge = document.createElement('a');
+  badge.href = '/dmca.html';
+  badge.className = 'dmca-badge';
+  badge.setAttribute('aria-label', 'DMCA Protected — view our Copyright & DMCA Notice');
+  badge.title = 'DMCA Protected — view our Copyright & DMCA Notice';
+  badge.innerHTML =
+    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 3 6v6c0 5 3.8 8.6 9 10 5.2-1.4 9-5 9-10V6l-9-4z"/><path d="m9 12 2 2 4-4"/></svg>' +
+    '<span>DMCA Protected</span>';
+  document.body.append(badge);
+}

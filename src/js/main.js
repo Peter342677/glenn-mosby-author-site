@@ -4,7 +4,7 @@ import '../css/components.css';
 import '../css/animations.css';
 import '../css/accessibility.css';
 
-import { initAccessibilityToolbar } from './accessibility.js';
+import { initAccessibilityToolbar, initDmcaBadge } from './accessibility.js';
 import { initNav } from './nav.js';
 import { initSmoothScroll } from './smoothScroll.js';
 import { initReveal, initCountUp, initParallax } from './scroll.js';
@@ -25,6 +25,7 @@ import { initCheckoutPage } from './checkoutPage.js';
 // playback just because it happens to run earlier in this list).
 [
   initAccessibilityToolbar,
+  initDmcaBadge,
   initIntroLoader,
   initNav,
   initSmoothScroll,

@@ -33,6 +33,56 @@ html {
   outline-offset: 2px;
 }
 
+.dmca-badge {
+  position: fixed;
+  left: calc(var(--space-sm) + 62px);
+  bottom: var(--space-sm);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 50px;
+  padding: 0 var(--space-xs);
+  border-radius: var(--radius-pill);
+  background: var(--color-paper);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-fine);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform var(--dur-fast) var(--ease-out), color var(--dur-fast);
+}
+
+.dmca-badge svg {
+  color: var(--color-barn-red);
+  flex-shrink: 0;
+}
+
+.dmca-badge:hover,
+.dmca-badge:focus-visible {
+  color: var(--color-barn-red);
+  transform: translateY(-2px);
+}
+
+.dmca-badge:focus-visible {
+  outline: 3px solid var(--color-marigold);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .dmca-badge span {
+    display: none;
+  }
+
+  .dmca-badge {
+    width: 50px;
+    padding: 0;
+    justify-content: center;
+  }
+}
+
 .a11y-panel {
   position: fixed;
   left: var(--space-sm);
