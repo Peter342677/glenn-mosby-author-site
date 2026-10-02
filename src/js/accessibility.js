@@ -2,7 +2,40 @@
 // and reduced motion. Preferences persist per-browser via localStorage.
 const STORAGE_KEY = 'ofjhaf-a11y-prefs';
 const FONT_SCALES = [1, 1.125, 1.25, 1.4];
-const DEFAULT_PREFS = { fontScaleIndex: 0, highContrast: false, underlineLinks: false, reduceMotion: false };
+
+// Each toggle maps a pref key to a class on <html> (styled in accessibility.css).
+const TOGGLE_GROUPS = [
+  {
+    title: 'Text',
+    toggles: [
+      { key: 'readableFont', label: 'Readable Font', className: 'a11y-readable-font' },
+      { key: 'textSpacing', label: 'Text Spacing', className: 'a11y-text-spacing' },
+    ],
+  },
+  {
+    title: 'Display',
+    toggles: [
+      { key: 'highContrast', label: 'High Contrast', className: 'a11y-high-contrast' },
+      { key: 'grayscale', label: 'Grayscale', className: 'a11y-grayscale' },
+      { key: 'reduceMotion', label: 'Reduce Motion', className: 'a11y-reduce-motion' },
+    ],
+  },
+  {
+    title: 'Navigation',
+    toggles: [
+      { key: 'underlineLinks', label: 'Underline Links', className: 'a11y-underline-links' },
+      { key: 'focusHighlight', label: 'Highlight Focus', className: 'a11y-focus-highlight' },
+      { key: 'bigCursor', label: 'Big Cursor', className: 'a11y-big-cursor' },
+      { key: 'hideCursorFx', label: 'Hide Cursor Effects', className: 'a11y-no-cursor-fx' },
+      { key: 'readingGuide', label: 'Reading Guide', className: 'a11y-reading-guide-on' },
+    ],
+  },
+];
+const ALL_TOGGLES = TOGGLE_GROUPS.flatMap((g) => g.toggles);
+const DEFAULT_PREFS = {
+  fontScaleIndex: 0,
+  ...Object.fromEntries(ALL_TOGGLES.map((t) => [t.key, false])),
+};
 
 function loadPrefs() {
   try {
@@ -24,9 +57,7 @@ function savePrefs(prefs) {
 function applyPrefs(prefs) {
   const root = document.documentElement;
   root.style.setProperty('--a11y-font-scale', String(FONT_SCALES[prefs.fontScaleIndex] ?? 1));
-  root.classList.toggle('a11y-high-contrast', !!prefs.highContrast);
-  root.classList.toggle('a11y-underline-links', !!prefs.underlineLinks);
-  root.classList.toggle('a11y-reduce-motion', !!prefs.reduceMotion);
+  ALL_TOGGLES.forEach((t) => root.classList.toggle(t.className, !!prefs[t.key]));
 
   document.querySelectorAll('video[autoplay]').forEach((video) => {
     if (prefs.reduceMotion) video.pause();
@@ -63,22 +94,35 @@ export function initAccessibilityToolbar() {
         <button type="button" data-a11y-action="font-inc" aria-label="Increase text size">A+</button>
       </div>
     </div>
+    ${TOGGLE_GROUPS.map(
+      (g) => `
+    <h3 class="a11y-group-title">${g.title}</h3>
+    ${g.toggles
+      .map(
+        (t) => `
     <label class="a11y-switch-row">
-      <span>High Contrast</span>
-      <input type="checkbox" data-a11y-toggle="highContrast" />
-    </label>
-    <label class="a11y-switch-row">
-      <span>Underline Links</span>
-      <input type="checkbox" data-a11y-toggle="underlineLinks" />
-    </label>
-    <label class="a11y-switch-row">
-      <span>Reduce Motion</span>
-      <input type="checkbox" data-a11y-toggle="reduceMotion" />
-    </label>
+      <span>${t.label}</span>
+      <input type="checkbox" data-a11y-toggle="${t.key}" />
+    </label>`
+      )
+      .join('')}`
+    ).join('')}
     <button type="button" class="a11y-reset-all" data-a11y-action="reset-all">Reset All</button>
   `;
 
-  document.body.append(toggleBtn, panel);
+  // Horizontal band that follows the pointer to help track lines of text.
+  const guide = document.createElement('div');
+  guide.className = 'a11y-reading-guide';
+  guide.setAttribute('aria-hidden', 'true');
+  window.addEventListener(
+    'pointermove',
+    (e) => {
+      if (prefs.readingGuide) guide.style.transform = `translateY(${e.clientY - 22}px)`;
+    },
+    { passive: true }
+  );
+
+  document.body.append(toggleBtn, panel, guide);
 
   const syncControls = () => {
     panel.querySelectorAll('[data-a11y-toggle]').forEach((input) => {
