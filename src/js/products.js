@@ -45,6 +45,17 @@ export const PRODUCTS = [
   },
 ];
 
+// Cart-only item: sold from the raffle section on shop.html, so it must not be
+// in PRODUCTS (which drives the merch grid) but cart/checkout still need to
+// resolve it to render the line and total.
+const RAFFLE_ENTRY = {
+  id: 'anniversary-raffle',
+  name: '2-Year Anniversary Raffle Entry',
+  price: 200,
+  image: '/assets/img/merch/anniversary-gift-set.jpg',
+};
+
 export function getProductById(id) {
+  if (id === RAFFLE_ENTRY.id) return RAFFLE_ENTRY;
   return PRODUCTS.find((p) => p.id === id) || null;
 }
