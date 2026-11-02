@@ -1,10 +1,6 @@
 // Authoritative product/price catalog for the server. Never trust prices
 // submitted by the client — always look up the amount to charge from here
 // when creating a Stripe Checkout Session.
-//
-// Books are not sold as merchandise — the hardcover and paperback are
-// consolation prizes (2nd/3rd) in the anniversary raffle only, not their
-// own line item here.
 export const PRODUCTS = {
   'coloring-crayons': {
     name: 'Coloring Book & Crayons Set',
@@ -31,12 +27,6 @@ export const PRODUCTS = {
     name: 'Old Farmer John Had a Farm — Gift Package',
     price: 4000,
     image: '/assets/img/merch/gift-set.jpg',
-    variations: null,
-  },
-  'anniversary-raffle': {
-    name: '2-Year Anniversary Raffle Entry',
-    price: 200,
-    image: '/assets/img/merch/anniversary-gift-set.jpg',
     variations: null,
   },
 };

@@ -67,20 +67,4 @@ export function initMerchGallery() {
   if (grid) {
     PRODUCTS.forEach((product) => grid.appendChild(renderCard(product)));
   }
-
-  const raffleBtn = document.querySelector('[data-add-to-cart="anniversary-raffle"]');
-  if (raffleBtn) {
-    raffleBtn.addEventListener('click', () => {
-      addToCart('anniversary-raffle', null, 1);
-      const status = document.querySelector('[data-raffle-status]');
-      if (status) {
-        status.textContent = 'Raffle entry added to cart!';
-        status.classList.add('success');
-        setTimeout(() => {
-          status.textContent = '';
-          status.classList.remove('success');
-        }, 2000);
-      }
-    });
-  }
 }

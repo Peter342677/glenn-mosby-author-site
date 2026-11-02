@@ -1,9 +1,12 @@
+import { getProductById } from './products.js';
+
 const CART_KEY = 'ofjhaf-cart';
 
 export function readCart() {
   try {
     const raw = localStorage.getItem(CART_KEY);
-    return raw ? JSON.parse(raw) : [];
+    // Drop items for products no longer sold (e.g. a retired raffle entry saved in an old cart).
+    return raw ? JSON.parse(raw).filter((i) => getProductById(i.productId)) : [];
   } catch {
     return [];
   }
