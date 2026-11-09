@@ -29,12 +29,6 @@ export const PRODUCTS = {
       purple: 'Purple Lid',
     },
   },
-  'merch-package': {
-    name: 'Old Farmer John Had a Farm — Gift Package',
-    price: 4000,
-    image: '/assets/img/merch/gift-set.jpg',
-    variations: null,
-  },
   // Closes at the end of Dec 25, 2026 US Eastern; checkout rejects it after.
   'christmas-raffle': {
     name: '2-Year Anniversary Christmas Raffle Entry',

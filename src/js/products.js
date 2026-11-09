@@ -42,15 +42,6 @@ export const PRODUCTS = [
     ],
   },
   {
-    id: 'merch-package',
-    name: 'Old Farmer John Had a Farm — Gift Package',
-    price: 4000,
-    image: '/assets/img/merch/gift-set.jpg',
-    badge: 'Best Value',
-    description:
-      'The coloring book with a 24-count Crayola crayon set, a canvas & paints set, and a Farmer John traveler\'s cup, packaged together as a gift.',
-  },
-  {
     id: 'coloring-crayons',
     name: 'Coloring Book & Crayons Set',
     price: 1000,
