@@ -29,6 +29,14 @@ export const PRODUCTS = {
     image: '/assets/img/merch/gift-set.jpg',
     variations: null,
   },
+  // Closes at the end of Dec 25, 2026 US Eastern; checkout rejects it after.
+  'christmas-raffle': {
+    name: '2-Year Anniversary Christmas Raffle Entry',
+    price: 200,
+    image: '/assets/img/merch/christmas-raffle-prize.jpg',
+    variations: null,
+    endsAt: Date.parse('2026-12-26T04:59:59Z'),
+  },
 };
 
 export function getProduct(id) {

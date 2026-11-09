@@ -41,6 +41,23 @@ export const PRODUCTS = [
   },
 ];
 
+// Christmas raffle: sold from the raffle section on shop.html, so it stays out
+// of PRODUCTS (which drives the merch grid). Closes at the end of Dec 25, 2026
+// US Eastern; after that it resolves to null so it can't be bought or shown
+// in a saved cart.
+const RAFFLE_ENDS_AT = Date.parse('2026-12-26T04:59:59Z');
+const RAFFLE_ENTRY = {
+  id: 'christmas-raffle',
+  name: '2-Year Anniversary Christmas Raffle Entry',
+  price: 200,
+  image: '/assets/img/merch/christmas-raffle-prize.jpg',
+};
+
+export function isRaffleOpen() {
+  return Date.now() <= RAFFLE_ENDS_AT;
+}
+
 export function getProductById(id) {
+  if (id === RAFFLE_ENTRY.id) return isRaffleOpen() ? RAFFLE_ENTRY : null;
   return PRODUCTS.find((p) => p.id === id) || null;
 }

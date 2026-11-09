@@ -1,4 +1,4 @@
-import { PRODUCTS } from './products.js';
+import { PRODUCTS, isRaffleOpen } from './products.js';
 import { addToCart } from './cart.js';
 
 function formatPrice(cents) {
@@ -66,5 +66,24 @@ export function initMerchGallery() {
   const grid = document.querySelector('[data-merch-grid]');
   if (grid) {
     PRODUCTS.forEach((product) => grid.appendChild(renderCard(product)));
+  }
+
+  const raffleSection = document.querySelector('[data-raffle-section]');
+  if (raffleSection && !isRaffleOpen()) raffleSection.hidden = true;
+
+  const raffleBtn = document.querySelector('[data-add-to-cart="christmas-raffle"]');
+  if (raffleBtn) {
+    raffleBtn.addEventListener('click', () => {
+      addToCart('christmas-raffle', null, 1);
+      const status = document.querySelector('[data-raffle-status]');
+      if (status) {
+        status.textContent = 'Raffle entry added to cart!';
+        status.classList.add('success');
+        setTimeout(() => {
+          status.textContent = '';
+          status.classList.remove('success');
+        }, 2000);
+      }
+    });
   }
 }

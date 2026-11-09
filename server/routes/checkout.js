@@ -41,6 +41,9 @@ router.post('/', checkoutLimiter, async (req, res) => {
     if (!product) {
       return res.status(400).json({ error: `Unknown product: ${item.productId}` });
     }
+    if (product.endsAt && Date.now() > product.endsAt) {
+      return res.status(400).json({ error: `${product.name} has closed.` });
+    }
     const qty = Math.min(20, Math.max(1, Number(item.qty) || 1));
 
     let variationLabel = null;
