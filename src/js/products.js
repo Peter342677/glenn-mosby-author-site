@@ -25,6 +25,7 @@ export const PRODUCTS = [
       'Wild animal toy figures',
       'LED nightlight',
       'Soft and chewy fish candy',
+      'Animal crackers',
     ],
     gallery: [
       { src: '/assets/img/merch/gift-box.jpg', alt: 'Old Farmer John Gift Box' },
