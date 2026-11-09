@@ -31,6 +31,8 @@ export const PRODUCTS = [
       { src: '/assets/img/merch/gift-box.jpg', alt: 'Old Farmer John Gift Box' },
       { src: '/assets/img/merch/gift-box-book.jpg', alt: 'Old Farmer John Had a Farm paperback book with a bookmark' },
       { src: '/assets/img/merch/gift-box-plush.jpg', alt: 'Farmer plush in blue overalls and a cowboy hat' },
+      { src: '/assets/img/merch/gift-box-mermaid.jpg', alt: 'Velvet mermaid throw blanket in light blue' },
+      { src: '/assets/img/merch/gift-box-dino.jpg', alt: 'Dinosaur hooded towel wrap' },
       { src: '/assets/img/merch/gift-box-cup.jpg', alt: "Old Farmer John traveler's cup" },
       { src: '/assets/img/merch/gift-box-coloring.jpg', alt: 'On the Farm coloring book with a 24-count crayon set' },
       { src: '/assets/img/merch/gift-box-canvas.jpg', alt: 'Stretched canvas with a sloth outline and a paint palette' },
@@ -39,6 +41,7 @@ export const PRODUCTS = [
       { src: '/assets/img/merch/gift-box-animals.jpg', alt: 'Bag of 16 wild animal toy figures' },
       { src: '/assets/img/merch/gift-box-nightlight.jpg', alt: 'LED nightlight' },
       { src: '/assets/img/merch/gift-box-candy.jpg', alt: 'Box of soft and chewy fish candy' },
+      { src: '/assets/img/merch/gift-box-crackers.jpg', alt: 'Animal crackers in a school bus shaped box' },
     ],
   },
   {
