@@ -23,9 +23,23 @@ function renderCard(product) {
       </div>`
     : '';
 
+  const gallery = product.gallery;
+  const galleryHtml = gallery
+    ? `<button type="button" class="merch-nav merch-prev" aria-label="Previous photo">&lsaquo;</button>
+       <button type="button" class="merch-nav merch-next" aria-label="Next photo">&rsaquo;</button>
+       <span class="merch-counter" aria-live="polite">1 / ${gallery.length}</span>`
+    : '';
+  const includesHtml = product.includes
+    ? `<div class="merch-includes">
+        <h4>What&rsquo;s inside</h4>
+        <ul>${product.includes.map((item) => `<li>${item}</li>`).join('')}</ul>
+      </div>`
+    : '';
+
   card.innerHTML = `
-    <div class="merch-media">
+    <div class="merch-media${gallery ? ' merch-media-gallery' : ''}">
       <img class="merch-photo is-active" src="${product.image}" alt="${product.name}" loading="lazy" />
+      ${galleryHtml}
     </div>
     <div class="merch-body">
       ${product.badge ? `<span class="merch-badge">${product.badge}</span>` : ''}
@@ -33,6 +47,7 @@ function renderCard(product) {
       <p class="product-price">${product.regularPrice ? `<s class="product-regular-price">${formatPrice(product.regularPrice)}</s> ` : ''}${formatPrice(product.price)}</p>
       ${product.value ? `<p class="product-value">Valued at ${formatPrice(product.value)}</p>` : ''}
       <p>${product.description}</p>
+      ${includesHtml}
       ${variationHtml}
       <button type="button" class="btn btn-primary" data-add-to-cart data-cursor-label="Add">Add to Cart</button>
       <p class="add-to-cart-status" role="status" aria-live="polite"></p>
@@ -46,6 +61,25 @@ function renderCard(product) {
       input.closest('.variation-option').classList.add('is-selected');
     });
   });
+
+  if (gallery) {
+    const photo = card.querySelector('.merch-photo');
+    const counter = card.querySelector('.merch-counter');
+    let index = 0;
+    const show = (i) => {
+      index = (i + gallery.length) % gallery.length;
+      photo.src = gallery[index].src;
+      photo.alt = gallery[index].alt;
+      counter.textContent = `${index + 1} / ${gallery.length}`;
+    };
+    card.querySelector('.merch-prev').addEventListener('click', () => show(index - 1));
+    card.querySelector('.merch-next').addEventListener('click', () => show(index + 1));
+    card.addEventListener(
+      'pointerenter',
+      () => gallery.forEach((g) => { new Image().src = g.src; }),
+      { once: true }
+    );
+  }
 
   const addBtn = card.querySelector('[data-add-to-cart]');
   const status = card.querySelector('.add-to-cart-status');
