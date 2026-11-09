@@ -843,6 +843,18 @@
   margin-bottom: var(--space-sm);
 }
 
+.product-regular-price {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-right: var(--space-2xs);
+}
+
+.product-value {
+  margin: calc(-1 * var(--space-xs)) 0 var(--space-xs);
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
 .product-details-list {
   list-style: none;
   margin: 0 0 var(--space-md);

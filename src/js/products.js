@@ -3,6 +3,17 @@
 // nothing here is trusted for payment.
 export const PRODUCTS = [
   {
+    id: 'gift-box',
+    name: 'Old Farmer John Gift Box',
+    price: 3000,
+    regularPrice: 5000,
+    value: 6000,
+    image: '/assets/img/merch/gift-box.jpg',
+    badge: 'Christmas Sale',
+    description:
+      'A ready-to-gift box packed with fun for young readers, inspired by Old Farmer John Had a Farm. A perfect Christmas present.',
+  },
+  {
     id: 'merch-package',
     name: 'Old Farmer John Had a Farm — Gift Package',
     price: 4000,

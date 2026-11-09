@@ -2,6 +2,12 @@
 // submitted by the client — always look up the amount to charge from here
 // when creating a Stripe Checkout Session.
 export const PRODUCTS = {
+  'gift-box': {
+    name: 'Old Farmer John Gift Box',
+    price: 3000,
+    image: '/assets/img/merch/gift-box.jpg',
+    variations: null,
+  },
   'coloring-crayons': {
     name: 'Coloring Book & Crayons Set',
     price: 1000,

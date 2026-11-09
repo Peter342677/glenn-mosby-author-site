@@ -30,7 +30,8 @@ function renderCard(product) {
     <div class="merch-body">
       ${product.badge ? `<span class="merch-badge">${product.badge}</span>` : ''}
       <h3>${product.name}</h3>
-      <p class="product-price">${formatPrice(product.price)}</p>
+      <p class="product-price">${product.regularPrice ? `<s class="product-regular-price">${formatPrice(product.regularPrice)}</s> ` : ''}${formatPrice(product.price)}</p>
+      ${product.value ? `<p class="product-value">Valued at ${formatPrice(product.value)}</p>` : ''}
       <p>${product.description}</p>
       ${variationHtml}
       <button type="button" class="btn btn-primary" data-add-to-cart data-cursor-label="Add">Add to Cart</button>
